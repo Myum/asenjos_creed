@@ -1,0 +1,17 @@
+
+varying vec3 pixel_pos;
+varying vec4 pixel_color;
+varying vec3 pixel_normal;
+
+void main()
+{
+	vec4 color = pixel_color;
+
+	vec3 L = normalize( vec3(1.0,1.0,1.0) );
+	vec3 N = normalize( pixel_normal );
+
+	float NdotL = clamp( dot(L,N), 0.0, 1.0);
+	color.xyz *= NdotL;
+
+	gl_FragColor = color;
+}

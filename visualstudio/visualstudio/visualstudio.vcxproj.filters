@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\src\game.cpp" />
+    <ClCompile Include="..\..\src\Entity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\EntityMesh.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\World.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MeshManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TextureManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\camera.cpp">
+      <Filter>SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\framework.cpp">
+      <Filter>SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\main.cpp">
+      <Filter>SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rendertotexture.cpp">
+      <Filter>SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\shader.cpp">
+      <Filter>SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\text.cpp">
+      <Filter>SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\texture.cpp">
+      <Filter>SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\utils.cpp">
+      <Filter>SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\EntityStatic.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\EntityPlayer.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\mesh.cpp">
+      <Filter>SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\clipper.cpp">
+      <Filter>SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Bullet.cpp">
+      <Filter>SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\coldet\box.cpp">
+      <Filter>coldet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\coldet\box_bld.cpp">
+      <Filter>coldet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\coldet\coldet.cpp">
+      <Filter>coldet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\coldet\coldet_bld.cpp">
+      <Filter>coldet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\coldet\math3d.cpp">
+      <Filter>coldet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\coldet\mytritri.cpp">
+      <Filter>coldet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\coldet\sysdep.cpp">
+      <Filter>coldet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\coldet\tritri.c">
+      <Filter>coldet</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\game.h" />
+    <ClInclude Include="..\..\src\Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\EntityMesh.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\World.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MeshManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TextureManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\camera.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\framework.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\includes.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\mesh.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\rendertotexture.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\shader.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\text.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\texture.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utils.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\EntityStatic.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\EntityPlayer.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\clipper.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Bullet.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\coldet\box.h">
+      <Filter>coldet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\coldet\coldet.h">
+      <Filter>coldet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\coldet\coldetimpl.h">
+      <Filter>coldet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\coldet\math3d.h">
+      <Filter>coldet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\coldet\mytritri.h">
+      <Filter>coldet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\coldet\sysdep.h">
+      <Filter>coldet</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="visualstudio.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{06301b9e-5812-4652-8576-7413bd61d25d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{4cceef35-6ced-4475-a1d2-2571d13cf805}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDK">
+      <UniqueIdentifier>{363da495-e11d-4c7c-b2f8-797ecc5d2889}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="coldet">
+      <UniqueIdentifier>{c3b9e4e1-1e33-4636-b2ac-41e7ae16dac4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\coldet\coldet.dsp">
+      <Filter>coldet</Filter>
+    </None>
+  </ItemGroup>
+</Project>

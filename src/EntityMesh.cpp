@@ -3,6 +3,7 @@
 EntityMesh::EntityMesh():Entity()
 {
 	this->className = "EntityMesh";
+	this->fixedMesh = 0;
 }
 
 EntityMesh::EntityMesh( Mesh* mesh ):Entity()
@@ -11,6 +12,7 @@ EntityMesh::EntityMesh( Mesh* mesh ):Entity()
 	this->mesh = this->low_mesh = this->high_mesh = mesh;
 	this->color = Vector3(1, 1, 1);
 	this->centerEntity = mesh->center;
+	this->fixedMesh = 0;
 }
 
 EntityMesh::EntityMesh( Mesh* mesh, Texture* texture ):Entity()
@@ -20,6 +22,7 @@ EntityMesh::EntityMesh( Mesh* mesh, Texture* texture ):Entity()
 	this->texture = texture;
 	this->color = Vector3(1, 1, 1);
 	this->centerEntity = mesh->center;
+	this->fixedMesh = 0;
 }
 
 EntityMesh::EntityMesh( Mesh* mesh, Texture* texture, Vector3 color ):Entity()
@@ -29,22 +32,12 @@ EntityMesh::EntityMesh( Mesh* mesh, Texture* texture, Vector3 color ):Entity()
 	this->texture = texture;
 	this->color = color;
 	this->centerEntity = mesh->center;
+	this->fixedMesh = 0;
 }
 
 EntityMesh::~EntityMesh()
 {
 }
-
-/*void EntityMesh::init()
-{
-//set flags
-//DEPTH_TEST = true;
-
-camera = new Camera();
-//camera->lookAt(Vector3(0,50,-50),Vector3(0,0,0), Vector3(0,1,0)); //position the camera and point to 0,0,0
-camera->lookAt(camera->eye,model*Vector3(),Vector3(0,1,0));
-camera->setPerspective(70,WINDOW_WIDTH/(float)WINDOW_HEIGHT,0.1,10000); //set the projection, we want to be perspective
-}*/
 
 void EntityMesh::update( double elapsed_time )
 {
@@ -80,5 +73,39 @@ void EntityMesh::render()
 }
 
 bool EntityMesh::rayCollision(Vector3 ray_origin, Vector3 ray_direction){
-	return this->mesh->collision_model->rayCollision(ray_origin.v, ray_direction.v,false);
+	return this->mesh->collision_model->rayCollision(ray_origin.v, ray_direction.v,true);
+}
+Vector3 EntityMesh::rayCollisionPoint(Vector3 ray_origin, Vector3 ray_direction){
+	this->mesh->collision_model->rayCollision(ray_origin.v, ray_direction.v,true);
+	float p[3];
+	this->mesh->collision_model->getCollisionPoint(p,true);// point on local position
+	Vector3 vec;
+	vec.x = p[0];
+	vec.y = p[1];
+	vec.z = p[2];
+	vec = this->getGlobalMatrix() * vec; // point on world position
+	return vec;
+}
+bool EntityMesh::meshCollision(EntityMesh* eM)
+{
+	return this->mesh->collision_model->collision(eM->mesh->collision_model,-1,0,eM->getGlobalMatrix().m);
+}
+
+float EntityMesh::distanceOfCollision(Vector3 ray_origin, Vector3 ray_direction)
+{
+	Vector3 vec = this->rayCollisionPoint(ray_origin, ray_direction);
+	return vec.distance(ray_origin);
+}
+
+bool EntityMesh::boundingBoxCollision(EntityMesh* eM)
+{
+	Vector3 halfsize = this->getGlobalMatrix() * this->mesh->halfsize;
+	Vector3 halfsize2 = eM->getGlobalMatrix() * eM->mesh->halfsize;
+	//std::cout<<this->name<<"  :: "<<halfsize.x - (this->mesh->halfsize.x * 2)<<"  -  "<<halfsize.x << std::endl;
+	//std::cout<<eM->name<<"  :: "<<halfsize2.x-(eM->mesh->centerBB.x * 2)<< "  -  " << halfsize2.x << std::endl;
+	if( (halfsize.x > halfsize2.x) && ( halfsize.x - (this->mesh->halfsize.x * 2)) < halfsize2.x )
+		if( (halfsize.y > halfsize2.y) && ( halfsize.y - (this->mesh->halfsize.y * 2)) < halfsize2.y )  
+			if( (halfsize.z > halfsize2.z) && ( halfsize.z - (this->mesh->halfsize.z * 2)) < halfsize2.z )  
+				return true;
+	return false;
 }

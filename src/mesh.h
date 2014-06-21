@@ -30,6 +30,8 @@ public:
 	bool createBin(const char* meshFileBin);
 	bool loadASEbin(const char* meshFileBin);
 
+	Vector3 centerBB,halfsize,maxBB,minBB;
+
 	CollisionModel3D* collision_model;
 	void coldetInit();
 

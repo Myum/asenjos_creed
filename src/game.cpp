@@ -11,6 +11,7 @@
 #include <mmsystem.h>
 #include <sstream>
 #include "Bullet.h"
+#include "Billboard.h"
 
 
 //some globals
@@ -27,6 +28,11 @@ SDL_Joystick* joystick = NULL;
 EntityPlayer* plane;
 EntityMesh* sky;
 EntityMesh* box=NULL;
+EntityMesh* isle=NULL;
+Billboard* cloud = NULL;
+
+const int numEnemies = 100;
+std::vector<EntityMesh*> died_planes;
 
 int x = 0, y = 0, z = 0;
 
@@ -67,28 +73,72 @@ void Game::init(void)
 	world->currentCamera = camera;
 
 	//create sky
-	/*sky = new EntityStatic( 
+	sky = new EntityStatic( 
 		meshManager->getMesh("assets/meshes/cubemap.ASE"),
 		textureManager->getTexture("assets/textures/cielo.tga"));
 	sky->name = "sky";
 	world->addEntityChildren( sky );
-
-	world->addEntityChildren(new EntityMesh(
+	
+	isle = new EntityMesh(
 		meshManager->getMesh("assets/meshes/island.ASE"),
 		textureManager->getTexture("assets/textures/island_color_luz.tga")
-		));*/
+		);
+	isle->name="isle0";
+	isle->model.setTranslation(isle->mesh->halfsize.x*2,-2000,0);
+	isle->fixedMesh = 1;
+	//isle->mesh->collision_model->setTransform(isle->getGlobalMatrix().m);
+	world->addEntityChildren(isle);
+	//((EntityMesh*)world->getChildren("isle"))->mesh->collision_model->setTransform(isle->getGlobalMatrix().m);
 
-	/*world->addEntityChildren(new EntityMesh(
-		meshManager->getMesh("assets/meshes/water_deep.ASE"),
-		textureManager->getTexture("assets/textures/water_deep.tga")
-		));*/
 
-	/*box = new EntityMesh (
+	isle = new EntityMesh(
+		meshManager->getMesh("assets/meshes/terrain.ASE"),
+		textureManager->getTexture("assets/textures/terrain.tga")
+		);
+	isle->name="isle";
+	isle->model.setTranslation(0,-1000,0);
+	isle->fixedMesh = 1;
+	//isle->mesh->collision_model->setTransform(isle->getGlobalMatrix().m);
+	world->addEntityChildren(isle);
+	((EntityMesh*)world->getChildren("isle"))->mesh->collision_model->setTransform(isle->getGlobalMatrix().m);
+
+	/*	isle = new EntityMesh(
+		meshManager->getMesh("assets/meshes/terrain.ASE"),
+		textureManager->getTexture("assets/textures/terrain.tga")
+		);
+	isle->name="isle2";
+	isle->fixedMesh = 1;
+	isle->model.setTranslation(0,-2000,0);
+	//isle->mesh->collision_model->setTransform(isle->getGlobalMatrix().m);
+	world->addEntityChildren(isle);*/
+	//((EntityMesh*)world->getChildren("isle2"))->mesh->collision_model->setTransform(isle->getGlobalMatrix().m);
+
+
+	box = new EntityMesh (
 		meshManager->getMesh("assets/meshes/box.ASE"),
 		textureManager->getTexture("assets/textures/bomber_axis.tga")
 		);
 	box->name = "box";
-	world->addEntityChildren( (EntityMesh*)box );*/
+	box->model.setTranslation(500,0,300);
+	//box->fixedMesh = 1;
+	world->addEntityChildren( (EntityMesh*)box );
+
+		box = new EntityMesh (
+		meshManager->getMesh("assets/meshes/box.ASE"),
+		textureManager->getTexture("assets/textures/bomber_axis.tga")
+		);
+	box->name = "box2";
+	box->model.setTranslation(10,25,2300);
+	world->addEntityChildren( (EntityMesh*)box );
+
+			box = new EntityMesh (
+		meshManager->getMesh("assets/meshes/box.ASE"),
+		textureManager->getTexture("assets/textures/bomber_axis.tga")
+		);
+	box->name = "box3";
+	box->model.setTranslation(10,25,2600);
+	world->addEntityChildren( (EntityMesh*)box );
+
 	//create a plane mesh
 	plane = new EntityPlayer(
 		meshManager->getMesh("assets/meshes/bomber_axis.ASE"),
@@ -98,14 +148,14 @@ void Game::init(void)
 	world->addEntityChildren( (EntityMesh*)plane );
 
 	//create a plane mesh
-	for(int i = 0; i <100; i++)
+	for(int i = 0; i <numEnemies; i++)
 	{
 		EntityMesh* enemies = new EntityMesh(
 			meshManager->getMesh("assets/meshes/bomber_axis.ASE"),
 			textureManager->getTexture("assets/textures/spitfire_color_spec.tga")
 			);
 		enemies->low_mesh = meshManager->getMesh("assets/meshes/spitfire_low.ASE");
-		enemies->model.setTranslation(rand()%100, rand()%100, rand()%100);
+		enemies->model.setTranslation(rand()%550, rand()%550, rand()%550);
 
 		std::ostringstream ostr;
 		ostr << "plane" << i; 
@@ -113,6 +163,25 @@ void Game::init(void)
 		std::cout << enemies->name << std::endl;
 		world->addEntityChildren( (EntityMesh*)enemies );
 	}
+	//died_planes.resize(numEnemies);
+
+
+		cloud = new Billboard(textureManager->getTexture("assets/textures/clouds.tga"));
+		//cloud->model.setTranslation(pos.x,pos.y,pos.z);
+		cloud->size = 200 + (( rand() % 10000) / 10000.0) * 50;
+		cloud->has_blend = true;
+			for(int i = 0; i<350; ++i)
+		{
+					Vector3 pos; 
+		pos.random(5000);
+		pos.y *= 0.1;
+		pos.y += 1000;
+		//cloud->points.push_back(pos);
+		cloud->points.push_back(new PointCloud(i,pos, ( (rand()%1000)/1000.0 )*500 ));
+		}
+		world->addEntityChildren(cloud);
+	
+
 
 	world->init();
 
@@ -142,7 +211,7 @@ void Game::render(void)
 	world->currentCamera->set();
 
 	world->render();
-	drawGrid(500);
+	//drawGrid(500);
 
 	//swap between front buffer and back buffer
 	SDL_GL_SwapWindow(this->window); // el doble buffer de openGL
@@ -190,7 +259,7 @@ void Game::update(double seconds_elapsed)
 		JoystickState state = getJoystickState( joystick );
 		
 		if(state.button[6] != NULL)
-			speed *= 100;
+			speed *= 50;
 
 		avanzar = state.axis[LEFT_ANALOG_Y];
 		if (avanzar>-0.2 && avanzar < 0.2) avanzar = 0;
@@ -208,20 +277,45 @@ void Game::update(double seconds_elapsed)
 		if (inclinarHor>-0.4 && inclinarHor< 0.4) inclinarHor = 0;
 		plane->model.rotateLocal(inclinarHor*seconds_elapsed*3,Vector3(0,0,-1));
 
+		//std::cout<< " died: "<< died_planes.size()<<std::endl;
+		if(died_planes.size()>0)
+		{
+			std::string name = (died_planes.back())->name;
+			std::cout<< " name: "<< name<<std::endl;
+			died_planes.pop_back();
+			//world->
+			world->killEntity(name);
+		}
+
+
 		if(state.button[7] != NULL)
 		{
 			plane->fire = true;
 			Vector3 dir = world->currentCamera->getLocalVector(Vector3(0,0,-1));
+			EntityMesh* meshCollided = NULL; 
 			for(size_t j = 0; j<world->childEntities.size();++j)
 			{
-				EntityMesh* eM = (EntityMesh*)world->childEntities[j];
-				Vector3 coll;
-				eM->mesh->collision_model->setTransform(eM->getGlobalMatrix().m);
-				if(eM->rayCollision(world->currentCamera->eye,dir))
+				if(world->childEntities[j]->className == "EntityMesh")
 				{
-					// target intercepted
-					eM->intercepted = true;
+					EntityMesh* eM = (EntityMesh*)world->childEntities[j];
+					Vector3 coll;
+					eM->mesh->collision_model->setTransform(eM->getGlobalMatrix().m);
+					if(eM->rayCollision(world->currentCamera->eye,dir))
+					{
+						// target intercepted
+						if(meshCollided != NULL){// el target més proper al player
+							if(meshCollided->distanceOfCollision(world->currentCamera->eye,dir) > eM->distanceOfCollision(world->currentCamera->eye,dir) )
+								meshCollided = eM;
+						}
+						else{
+							meshCollided = eM;
+						}
+					}
 				}
+			}
+			if(meshCollided != NULL){
+				meshCollided->intercepted = true;
+				died_planes.push_back(meshCollided);
 			}
 		}
 	}
@@ -230,15 +324,15 @@ void Game::update(double seconds_elapsed)
 	angle += seconds_elapsed * 1000;
 	/*if(avanzar< -0.7)
 	{
-	camera->lookAt(plane->model * Vector3(0,2,-7*((avanzar*(-1))+0.4)),plane->model*Vector3(0,0,100),plane->model.frontVector());
+	//camera->lookAt(plane->model * Vector3(0,2,-7*((avanzar*(-1))+0.4)),plane->model*Vector3(0,0,100),plane->model.frontVector());
 	}
 	else 
 	{*/
 	camera->lookAt(plane->model * Vector3(0,4,-10), plane->model*Vector3(0, 0, 150),plane->model.frontVector());	
 	//}
 
-	//sky = (EntityMesh*)world->getChildren( "sky" );
-//	sky->model.setTranslation( camera->eye.x, camera->eye.y, camera->eye.z );
+	sky = (EntityMesh*)world->getChildren( "sky" );
+	sky->model.setTranslation( camera->eye.x, camera->eye.y, camera->eye.z );
 	//camera->lookAt(camera->eye,entityPlane->model*Vector3(),Vector3(0,1,0));
 
 		if(keystate[SDL_SCANCODE_SPACE])

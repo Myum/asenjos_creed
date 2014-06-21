@@ -83,6 +83,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\Billboard.cpp" />
     <ClCompile Include="..\..\src\Bullet.cpp" />
     <ClCompile Include="..\..\src\camera.cpp" />
     <ClCompile Include="..\..\src\clipper.cpp" />
@@ -112,6 +113,7 @@
     <ClCompile Include="..\..\src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\Billboard.h" />
     <ClInclude Include="..\..\src\Bullet.h" />
     <ClInclude Include="..\..\src\camera.h" />
     <ClInclude Include="..\..\src\clipper.h" />

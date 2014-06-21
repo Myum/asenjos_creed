@@ -6,6 +6,8 @@
 Mesh::Mesh()
 {
 	primitive = GL_TRIANGLES;
+	centerBB = Vector3(0,0,0);
+	halfsize = Vector3(0,0,0);
 }
 
 void Mesh::clear()
@@ -18,6 +20,12 @@ void Mesh::clear()
 void Mesh::render()
 {
 	assert(vertices.size() && "No vertices in this mesh");
+	glBegin(GL_LINES);
+		//glColor4f(1,1,0,1);
+		glVertex3f(centerBB.x, centerBB.y, centerBB.z);
+		//std::cout<<halfsize.x<<std::endl;
+		glVertex3f( halfsize.x, halfsize.y, halfsize.z);
+	glEnd();
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, &vertices[0] );
@@ -118,12 +126,34 @@ bool Mesh::loadASE(const char *meshFile)
 		center.x += v.x;
 		center.y += v.y;
 		center.z += v.z;
+
+		if(v.x < minBB.x )	// 
+			minBB.x = v.x;
+		if(v.y < minBB.y )
+			minBB.y = v.y;
+		if(v.z < minBB.z )
+			minBB.z = v.z;
+
+		if(v.x > maxBB.x )
+			maxBB.x = v.x;
+		if(v.y > maxBB.y )
+			maxBB.y = v.y;
+		if(v.z > maxBB.z )
+			maxBB.z = v.z;
+
 	}
 
 	//average all values in center vector
 	center.x /= numVertices;
 	center.y /= numVertices;
 	center.z /= numVertices;
+
+	//center for the bounding box
+	centerBB.x = (maxBB.x + minBB.x) / 2;
+	centerBB.y = (maxBB.y + minBB.y) / 2;
+	centerBB.z = (maxBB.z + minBB.z) / 2;
+
+	halfsize = maxBB - centerBB;
 
 	//calculate maximum radius
 	radius = -1;
@@ -166,7 +196,7 @@ bool Mesh::loadASE(const char *meshFile)
 			uvs[face*3 + vxTxtr] = uv_temp[parser.getint()];
 		}
 	}
-	
+
 	normals.resize(numCaras * 3);
 	for(int i = 0; i < numCaras * 3; ++i){
 		parser.seek("*MESH_VERTEXNORMAL"); 
@@ -179,6 +209,8 @@ bool Mesh::loadASE(const char *meshFile)
 	}
 
 	createBin(meshFileBin);
+	clear();
+	loadASEbin(meshFileBin);
 	return true;
 
 }
@@ -203,13 +235,21 @@ bool Mesh::createBin(const char* meshFileBin){
 
 	binFile.write((char*)&radius, sizeof(float));
 
+	binFile.write((char*)&centerBB.x, sizeof(float));
+	binFile.write((char*)&centerBB.y, sizeof(float));
+	binFile.write((char*)&centerBB.z, sizeof(float));
+	
+	binFile.write((char*)&halfsize.x, sizeof(float));
+	binFile.write((char*)&halfsize.y, sizeof(float));
+	binFile.write((char*)&halfsize.z, sizeof(float));
+
 	binFile.close();
 	return true;
 
 }
 
 bool Mesh::loadASEbin(const char* meshFileBin){
-	
+
 	std::ifstream binFile;
 	binFile.open(meshFileBin, std::ios::in | std::ios::binary);
 	if(!binFile.is_open()){
@@ -234,6 +274,14 @@ bool Mesh::loadASEbin(const char* meshFileBin){
 
 	binFile.read((char*)&radius, sizeof(float));
 
+	binFile.read((char*)&centerBB.x, sizeof(float));
+	binFile.read((char*)&centerBB.y, sizeof(float));
+	binFile.read((char*)&centerBB.z, sizeof(float));
+	
+	binFile.read((char*)&halfsize.x, sizeof(float));
+	binFile.read((char*)&halfsize.y, sizeof(float));
+	binFile.read((char*)&halfsize.z, sizeof(float));
+
 	binFile.close();
 
 	this->coldetInit();
@@ -244,15 +292,15 @@ bool Mesh::loadASEbin(const char* meshFileBin){
 void Mesh::coldetInit()
 {
 	collision_model = newCollisionModel3D();
-    collision_model->setTriangleNumber(vertices.size()/3);
+	collision_model->setTriangleNumber(vertices.size()/3);
 
 	for(unsigned int i = 0; i < vertices.size()/3; ++i){
-        collision_model->addTriangle(
+		collision_model->addTriangle(
 			vertices[i*3].x,vertices[i*3].y,vertices[i*3].z,
 			vertices[i*3+1].x,vertices[i*3+1].y,vertices[i*3+1].z, 
 			vertices[i*3+2].x,vertices[i*3+2].y,vertices[i*3+2].z
-		);
+			);
 	}
-	
+
 	collision_model->finalize();
 }

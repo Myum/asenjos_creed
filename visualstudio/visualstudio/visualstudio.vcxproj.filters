@@ -80,6 +80,9 @@
     <ClCompile Include="..\..\src\coldet\tritri.c">
       <Filter>coldet</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Billboard.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\game.h" />
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\coldet\sysdep.h">
       <Filter>coldet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Billboard.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

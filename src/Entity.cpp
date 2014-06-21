@@ -3,6 +3,8 @@
 Entity::Entity()
 {
 	className = "Entity";
+	has_alpha = false;
+	has_blend = false;
 }
 
 Entity::~Entity()
@@ -73,4 +75,33 @@ Matrix44 Entity::getGlobalMatrix(){
 		return model * parent->getGlobalMatrix();
 	}
 	return model;
+}
+
+float Entity::distanceToCamera(Vector3 eye)
+{
+	//Matrix44 m = getGlobalMatrix();
+	Vector3 v;
+	v.x = (this->getGlobalMatrix().m)[12];
+	v.y = (this->getGlobalMatrix().m)[13];
+	v.z = (this->getGlobalMatrix().m)[14];
+	return  eye.distance( v );
+}
+
+void Entity::killEntity(std::string name)
+{
+	vecEntities::iterator it = childEntities.begin();
+	for(it; it!=childEntities.end();++it)
+	{
+		if((*it)->name == name)
+			break;
+	}
+	childEntities.erase(it);
+	mapEntities::iterator it2 = childNamedEntities.find( name );
+	if( it2 != childNamedEntities.end() )
+	{
+		it2->second = NULL;
+		std::cout<< name << " borrado!!!!"<<std::endl;
+		std::cout<< childEntities.size() << " redimensionado"<<std::endl;
+	}
+
 }

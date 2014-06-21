@@ -1,61 +1,12 @@
-﻿Build started 20/05/2014 20:21:30.
+﻿Build started 20/06/2014 21:44:05.
      1>Project "C:\Users\Beetwinn\Desktop\VIDEOJOCS\compartit\visualstudio\visualstudio\visualstudio.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppBuild.targets(346,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I../libs/include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\src\Bullet.cpp ..\..\src\camera.cpp ..\..\src\clipper.cpp ..\..\src\coldet\box.cpp ..\..\src\coldet\box_bld.cpp ..\..\src\coldet\coldet.cpp ..\..\src\coldet\coldet_bld.cpp ..\..\src\coldet\math3d.cpp ..\..\src\coldet\mytritri.cpp ..\..\src\coldet\sysdep.cpp ..\..\src\Entity.cpp ..\..\src\EntityMesh.cpp ..\..\src\EntityPlayer.cpp ..\..\src\EntityStatic.cpp ..\..\src\framework.cpp ..\..\src\game.cpp ..\..\src\main.cpp ..\..\src\mesh.cpp ..\..\src\MeshManager.cpp ..\..\src\rendertotexture.cpp ..\..\src\shader.cpp ..\..\src\text.cpp ..\..\src\texture.cpp ..\..\src\TextureManager.cpp ..\..\src\utils.cpp ..\..\src\World.cpp
-         World.cpp
-         utils.cpp
-         TextureManager.cpp
-         texture.cpp
-     1>c:\users\beetwinn\desktop\videojocs\compartit\src\texture.cpp(115): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(218) : see declaration of 'fopen'
-         text.cpp
-     1>c:\users\beetwinn\desktop\videojocs\compartit\src\text.cpp(21): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(218) : see declaration of 'fopen'
-     1>c:\users\beetwinn\desktop\videojocs\compartit\src\text.cpp(41): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(218) : see declaration of 'fopen'
-     1>c:\users\beetwinn\desktop\videojocs\compartit\src\text.cpp(45): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>c:\users\beetwinn\desktop\videojocs\compartit\src\text.cpp(70): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\beetwinn\desktop\videojocs\compartit\src\text.cpp(72): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\beetwinn\desktop\videojocs\compartit\src\text.cpp(74): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\beetwinn\desktop\videojocs\compartit\src\text.cpp(91): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(110) : see declaration of 'strcpy'
-         shader.cpp
-     1>c:\users\beetwinn\desktop\videojocs\compartit\src\shader.cpp(128): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(218) : see declaration of 'fopen'
-         rendertotexture.cpp
-         MeshManager.cpp
-         mesh.cpp
-     1>c:\users\beetwinn\desktop\videojocs\compartit\src\mesh.cpp(130): warning C4018: '<' : signed/unsigned mismatch
-         main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I../libs/include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\src\game.cpp
          game.cpp
-         framework.cpp
-         EntityStatic.cpp
-         EntityPlayer.cpp
-         EntityMesh.cpp
-         Entity.cpp
-         sysdep.cpp
-         mytritri.cpp
-         math3d.cpp
-         coldet_bld.cpp
-         Generating Code...
-     1>c:\users\beetwinn\desktop\videojocs\compartit\src\utils.cpp(133): warning C4715: 'openJoystick' : not all control paths return a value
-         Compiling...
-         coldet.cpp
-         box_bld.cpp
-     1>c:\users\beetwinn\desktop\videojocs\compartit\src\coldet\box_bld.cpp(134): warning C4018: '<' : signed/unsigned mismatch
-         box.cpp
-         clipper.cpp
-         camera.cpp
-         Bullet.cpp
-         Generating Code...
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I../libs/include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TC /analyze- /errorReport:prompt ..\..\src\coldet\tritri.c
-         tritri.c
-       ResourceCompile:
-         C:\Program Files (x86)\Windows Kits\8.0\bin\x86\rc.exe /D _UNICODE /D UNICODE /l"0x0409" /nologo /fo"Debug\visualstudio.res" visualstudio.rc 
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\..\visualstudio.exe" /INCREMENTAL:NO /NOLOGO SDL2.lib SDL2main.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"..\..\visualstudio.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"..\..\visualstudio.lib" /MACHINE:X86 Debug\visualstudio.res
+         Debug\Billboard.obj
          Debug\Bullet.obj
          Debug\camera.obj
          Debug\clipper.obj
@@ -83,11 +34,11 @@
          Debug\TextureManager.obj
          Debug\utils.obj
          Debug\World.obj
-     1>Bullet.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
+     1>Billboard.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
      1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'msvcrt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
          visualstudio.vcxproj -> C:\Users\Beetwinn\Desktop\VIDEOJOCS\compartit\visualstudio\visualstudio\..\..\visualstudio.exe
      1>Done Building Project "C:\Users\Beetwinn\Desktop\VIDEOJOCS\compartit\visualstudio\visualstudio\visualstudio.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:34.15
+Time Elapsed 00:00:02.93

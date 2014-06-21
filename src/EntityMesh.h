@@ -31,8 +31,16 @@ public:
 	Vector3 centerEntity;
 	Vector3 position;
 
+	// when something collides with it
 	bool intercepted;
 
+	//to diferenciate the terrain coz the sphere collision is too big
+	int fixedMesh;
+
 	bool rayCollision(Vector3 ray_origin, Vector3 ray_direction);
+	Vector3 rayCollisionPoint(Vector3 ray_origin, Vector3 ray_direction);
+	bool meshCollision(EntityMesh* eM);
+	float distanceOfCollision(Vector3 ray_origin, Vector3 ray_direction);
+	bool boundingBoxCollision(EntityMesh* eM);
 };
 

@@ -1,52 +1,94 @@
-﻿Build started 04/04/2014 1:17:50.
-     1>Project "C:\Users\Beetwinn\Desktop\VIDEOJOCS\2014\visualstudio\visualstudio\visualstudio.vcxproj" on node 2 (Build target(s)).
+﻿Build started 20/06/2014 16:35:09.
+     1>Project "C:\Users\Beetwinn\Desktop\VIDEOJOCS\compartit\visualstudio\visualstudio\visualstudio.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppBuild.targets(346,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I../libs/include /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\src\camera.cpp ..\..\src\framework.cpp ..\..\src\game.cpp ..\..\src\main.cpp ..\..\src\mesh.cpp ..\..\src\rendertotexture.cpp ..\..\src\shader.cpp ..\..\src\text.cpp ..\..\src\texture.cpp ..\..\src\utils.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I../libs/include /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\src\Billboard.cpp ..\..\src\Bullet.cpp ..\..\src\camera.cpp ..\..\src\clipper.cpp ..\..\src\coldet\box.cpp ..\..\src\coldet\box_bld.cpp ..\..\src\coldet\coldet.cpp ..\..\src\coldet\coldet_bld.cpp ..\..\src\coldet\math3d.cpp ..\..\src\coldet\mytritri.cpp ..\..\src\coldet\sysdep.cpp ..\..\src\Entity.cpp ..\..\src\EntityMesh.cpp ..\..\src\EntityPlayer.cpp ..\..\src\EntityStatic.cpp ..\..\src\framework.cpp ..\..\src\game.cpp ..\..\src\main.cpp ..\..\src\mesh.cpp ..\..\src\MeshManager.cpp ..\..\src\rendertotexture.cpp ..\..\src\shader.cpp ..\..\src\text.cpp ..\..\src\texture.cpp ..\..\src\TextureManager.cpp ..\..\src\utils.cpp ..\..\src\World.cpp
+         Billboard.cpp
+     1>..\..\src\Billboard.cpp(66): warning C4018: '<' : signed/unsigned mismatch
+         Bullet.cpp
          camera.cpp
+         clipper.cpp
+         box.cpp
+         box_bld.cpp
+     1>..\..\src\coldet\box_bld.cpp(134): warning C4018: '<' : signed/unsigned mismatch
+         coldet.cpp
+         coldet_bld.cpp
+         math3d.cpp
+         mytritri.cpp
+         sysdep.cpp
+         Entity.cpp
+         EntityMesh.cpp
+         EntityPlayer.cpp
+         EntityStatic.cpp
          framework.cpp
          game.cpp
          main.cpp
          mesh.cpp
+     1>..\..\src\mesh.cpp(130): warning C4018: '<' : signed/unsigned mismatch
+         MeshManager.cpp
+         Compiling...
          rendertotexture.cpp
          shader.cpp
      1>..\..\src\shader.cpp(128): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(218) : see declaration of 'fopen'
          text.cpp
-     1>..\..\src\text.cpp(20): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>..\..\src\text.cpp(21): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(218) : see declaration of 'fopen'
-     1>..\..\src\text.cpp(49): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>..\..\src\text.cpp(41): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(218) : see declaration of 'fopen'
-     1>..\..\src\text.cpp(53): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>..\..\src\text.cpp(45): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(357) : see declaration of 'sprintf'
-     1>..\..\src\text.cpp(78): warning C4018: '>=' : signed/unsigned mismatch
-     1>..\..\src\text.cpp(80): warning C4018: '<' : signed/unsigned mismatch
-     1>..\..\src\text.cpp(82): warning C4018: '>=' : signed/unsigned mismatch
-     1>..\..\src\text.cpp(99): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>..\..\src\text.cpp(70): warning C4018: '>=' : signed/unsigned mismatch
+     1>..\..\src\text.cpp(72): warning C4018: '<' : signed/unsigned mismatch
+     1>..\..\src\text.cpp(74): warning C4018: '>=' : signed/unsigned mismatch
+     1>..\..\src\text.cpp(91): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\string.h(110) : see declaration of 'strcpy'
          texture.cpp
      1>..\..\src\texture.cpp(115): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(218) : see declaration of 'fopen'
+         TextureManager.cpp
          utils.cpp
+         World.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I../libs/include /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TC /analyze- /errorReport:prompt ..\..\src\coldet\tritri.c
+         tritri.c
        ResourceCompile:
          C:\Program Files (x86)\Windows Kits\8.0\bin\x86\rc.exe /l"0x0409" /nologo /fo"Release\visualstudio.res" visualstudio.rc 
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\..\visualstudio.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"..\..\visualstudio.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"..\..\visualstudio.lib" /MACHINE:X86 /SAFESEH Release\visualstudio.res
+         Release\Billboard.obj
+         Release\Bullet.obj
          Release\camera.obj
+         Release\clipper.obj
+         Release\box.obj
+         Release\box_bld.obj
+         Release\coldet.obj
+         Release\coldet_bld.obj
+         Release\math3d.obj
+         Release\mytritri.obj
+         Release\sysdep.obj
+         Release\tritri.obj
+         Release\Entity.obj
+         Release\EntityMesh.obj
+         Release\EntityPlayer.obj
+         Release\EntityStatic.obj
          Release\framework.obj
          Release\game.obj
          Release\main.obj
          Release\mesh.obj
+         Release\MeshManager.obj
          Release\rendertotexture.obj
          Release\shader.obj
          Release\text.obj
          Release\texture.obj
+         Release\TextureManager.obj
          Release\utils.obj
+         Release\World.obj
          Generating code
+     1>c:\users\beetwinn\desktop\videojocs\compartit\src\utils.cpp(133): warning C4715: 'openJoystick' : not all control paths return a value
          Finished generating code
-         visualstudio.vcxproj -> C:\Users\Beetwinn\Desktop\VIDEOJOCS\2014\visualstudio\visualstudio\..\..\visualstudio.exe
-     1>Done Building Project "C:\Users\Beetwinn\Desktop\VIDEOJOCS\2014\visualstudio\visualstudio\visualstudio.vcxproj" (Build target(s)).
+         visualstudio.vcxproj -> C:\Users\Beetwinn\Desktop\VIDEOJOCS\compartit\visualstudio\visualstudio\..\..\visualstudio.exe
+     1>Done Building Project "C:\Users\Beetwinn\Desktop\VIDEOJOCS\compartit\visualstudio\visualstudio\visualstudio.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:11.72
+Time Elapsed 00:00:32.99

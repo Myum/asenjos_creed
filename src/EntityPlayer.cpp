@@ -54,17 +54,17 @@ void EntityPlayer::update( double elapsed_time)
 	{
 		Matrix44 start_poss = this->model;
 
-		start_poss.traslateLocal(-2,0,2);
+		start_poss.traslateLocal(-2,0,-2);
 		Vector3 start_pos = start_poss * Vector3();
 		//start_pos.z += 2.00;
 		//start_pos.y += 1.09;
 		//start_pos.x -= 2.50;
-		BulletManager::getInstance()->createBullet(start_pos,World::getInstance()->currentCamera->getLocalVector(Vector3(0,-1,-500)),this->name);
+		BulletManager::getInstance()->createBullet(start_pos,World::getInstance()->currentCamera->getLocalVector(Vector3(0,-1,-2000)),this->name);
 		///start_pos.z -= 1.09;
 		//start_pos.x += 5.00;
 		start_poss.traslateLocal(+4,0,0);
 		start_pos = start_poss * Vector3();
-		BulletManager::getInstance()->createBullet(start_pos,World::getInstance()->currentCamera->getLocalVector(Vector3(0,-1,-500)),this->name);
+		BulletManager::getInstance()->createBullet(start_pos,World::getInstance()->currentCamera->getLocalVector(Vector3(0,-1,-2000)),this->name);
 		fire = false;
 	}
 	mesh->collision_model->setTransform(getGlobalMatrix().m);

@@ -49,7 +49,7 @@ void World::render()
 		{
 			(*it)->render();
 
-		}
+		}															// cal checkejar contra clipper
 		else{ // billboard
 			(*it)->render();
 		}
@@ -57,6 +57,7 @@ void World::render()
 
 	//glEnable( GL_CULL_FACE );
 	BulletManager::getInstance()->render();
+	EmisorParticulas::getInstance()->render();
 
 	glPopMatrix();
 }
@@ -85,7 +86,7 @@ void World::update( double elapsed_time )
 							//((EntityMesh*)(*itColl))->intercepted = true;
 							if( ((EntityMesh*)(*it))->meshCollision( ((EntityMesh*)(*itColl)) ) )
 							{
-								std::cout << "Collision between " << ((EntityMesh*)(*it))->name << " and " << ((EntityMesh*)(*itColl))->name << std::endl;
+							//	std::cout << "Collision between " << ((EntityMesh*)(*it))->name << " and " << ((EntityMesh*)(*itColl))->name << std::endl;
 								((EntityMesh*)(*itColl))->intercepted = true;
 								((EntityMesh*)(*it))->intercepted = true;
 							}
@@ -95,9 +96,13 @@ void World::update( double elapsed_time )
 					{
 						if ( ( (EntityMesh*)(*it) )->boundingBoxCollision( ( (EntityMesh*)(*itColl) ))  )
 						{
-							std::cout << "TERRAIN: Collision between " << ((EntityMesh*)(*it))->name << " and " << ((EntityMesh*)(*itColl))->name << std::endl;
-							((EntityMesh*)(*itColl))->intercepted = true;
-							((EntityMesh*)(*it))->intercepted = true;
+						//	std::cout << "ddd: Collision between " << ((EntityMesh*)(*it))->name << " and " << ((EntityMesh*)(*itColl))->name << std::endl;
+							if( ((EntityMesh*)(*it))->meshCollision( ((EntityMesh*)(*itColl)) ) )
+							{
+						//		std::cout << "TERRAIN: Collision between " << ((EntityMesh*)(*it))->name << " and " << ((EntityMesh*)(*itColl))->name << std::endl;
+								((EntityMesh*)(*itColl))->intercepted = true;
+								((EntityMesh*)(*it))->intercepted = true;
+							}
 						}
 					}
 				}
@@ -105,4 +110,6 @@ void World::update( double elapsed_time )
 		}
 	}
 	BulletManager::getInstance()->update(elapsed_time);
+	EmisorParticulas::getInstance()->update(elapsed_time);
 }
+

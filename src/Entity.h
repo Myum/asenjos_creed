@@ -17,7 +17,7 @@ public:
 	//constructors
 	Entity();
 	Entity( std::string name );
-	~Entity();
+	virtual ~Entity();
 
 	//local variables
 	std::string className;
@@ -48,5 +48,6 @@ public:
 	float distanceToCamera(Vector3 eye);
 
 	Matrix44 getGlobalMatrix();
+
 };
 

@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "Camera.h"
 #include "Bullet.h"
+#include "EmisorParticulas.h"
 #include <map>
 
 class World: public Entity

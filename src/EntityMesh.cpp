@@ -4,6 +4,7 @@ EntityMesh::EntityMesh():Entity()
 {
 	this->className = "EntityMesh";
 	this->fixedMesh = 0;
+	this->has_particula = 0;
 }
 
 EntityMesh::EntityMesh( Mesh* mesh ):Entity()
@@ -13,6 +14,7 @@ EntityMesh::EntityMesh( Mesh* mesh ):Entity()
 	this->color = Vector3(1, 1, 1);
 	this->centerEntity = mesh->center;
 	this->fixedMesh = 0;
+	this->has_particula = 0;
 }
 
 EntityMesh::EntityMesh( Mesh* mesh, Texture* texture ):Entity()
@@ -23,6 +25,7 @@ EntityMesh::EntityMesh( Mesh* mesh, Texture* texture ):Entity()
 	this->color = Vector3(1, 1, 1);
 	this->centerEntity = mesh->center;
 	this->fixedMesh = 0;
+	this->has_particula = 0;
 }
 
 EntityMesh::EntityMesh( Mesh* mesh, Texture* texture, Vector3 color ):Entity()
@@ -33,11 +36,17 @@ EntityMesh::EntityMesh( Mesh* mesh, Texture* texture, Vector3 color ):Entity()
 	this->color = color;
 	this->centerEntity = mesh->center;
 	this->fixedMesh = 0;
+	this->has_particula = 0;
 }
 
 EntityMesh::~EntityMesh()
 {
+	if(has_particula)
+		//EmisorParticulas::getInstance()->killParticula(particula);
+		EmisorParticulas::getInstance()->getParticula(particula)->TTL = 0;
 }
+
+
 
 void EntityMesh::update( double elapsed_time )
 {
@@ -48,9 +57,22 @@ void EntityMesh::update( double elapsed_time )
 
 	//update center entity
 	centerEntity = Vector3(model.m[12], model.m[13], model.m[14]);
+	//front = this->getGlobalMatrix() * 
 	//position = ( parent ? ( parent->model * model ) * centerEntity : model * centerEntity );
 	//position = model * centerEntity;
-
+	if(has_particula)
+	{
+		Particula* p = EmisorParticulas::getInstance()->getParticula(particula);
+		if(p != NULL)
+		{
+			front = this->getGlobalMatrix().frontVector();
+			p->pos = this->centerEntity;
+			p->vel = this->front;
+		
+		}
+		else has_particula = 0;
+	}
+	this->mesh->collision_model->setTransform(getGlobalMatrix().m);
 }
 
 void EntityMesh::render()
@@ -101,7 +123,7 @@ bool EntityMesh::boundingBoxCollision(EntityMesh* eM)
 {
 	Vector3 halfsize = this->getGlobalMatrix() * this->mesh->halfsize;
 	Vector3 halfsize2 = eM->getGlobalMatrix() * eM->mesh->halfsize;
-	//std::cout<<this->name<<"  :: "<<halfsize.x - (this->mesh->halfsize.x * 2)<<"  -  "<<halfsize.x << std::endl;
+//	std::cout<<this->name<<"  :: "<<halfsize.x - (this->mesh->halfsize.x * 2)<<"  -  "<<halfsize.x << std::endl;
 	//std::cout<<eM->name<<"  :: "<<halfsize2.x-(eM->mesh->centerBB.x * 2)<< "  -  " << halfsize2.x << std::endl;
 	if( (halfsize.x > halfsize2.x) && ( halfsize.x - (this->mesh->halfsize.x * 2)) < halfsize2.x )
 		if( (halfsize.y > halfsize2.y) && ( halfsize.y - (this->mesh->halfsize.y * 2)) < halfsize2.y )  

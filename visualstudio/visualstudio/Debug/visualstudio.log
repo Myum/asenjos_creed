@@ -1,9 +1,13 @@
-﻿Build started 20/06/2014 21:44:05.
+﻿Build started 22/06/2014 2:20:08.
      1>Project "C:\Users\Beetwinn\Desktop\VIDEOJOCS\compartit\visualstudio\visualstudio\visualstudio.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppBuild.targets(346,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I../libs/include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\src\game.cpp
-         game.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I../libs/include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\src\EmisorParticulas.cpp
+         EmisorParticulas.cpp
+     1>c:\users\beetwinn\desktop\videojocs\compartit\src\emisorparticulas.cpp(88): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\beetwinn\desktop\videojocs\compartit\src\emisorparticulas.cpp(130): warning C4101: 'alpha' : unreferenced local variable
+     1>c:\users\beetwinn\desktop\videojocs\compartit\src\emisorparticulas.cpp(166): warning C4101: 'alpha' : unreferenced local variable
+     1>c:\users\beetwinn\desktop\videojocs\compartit\src\emisorparticulas.cpp(210): warning C4018: '<' : signed/unsigned mismatch
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\..\visualstudio.exe" /INCREMENTAL:NO /NOLOGO SDL2.lib SDL2main.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"..\..\visualstudio.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"..\..\visualstudio.lib" /MACHINE:X86 Debug\visualstudio.res
          Debug\Billboard.obj
@@ -18,6 +22,7 @@
          Debug\mytritri.obj
          Debug\sysdep.obj
          Debug\tritri.obj
+         Debug\EmisorParticulas.obj
          Debug\Entity.obj
          Debug\EntityMesh.obj
          Debug\EntityPlayer.obj
@@ -41,4 +46,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.93
+Time Elapsed 00:00:03.26

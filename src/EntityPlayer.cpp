@@ -29,12 +29,12 @@ void EntityPlayer::render()
 	glDisable( GL_CULL_FACE );
 
 	glPushMatrix();
-		model.set();
+	model.set();
 
-		this->texture->bind();
-		glColor3f(color.x, color.y, color.z);
+	this->texture->bind();
+	glColor3f(color.x, color.y, color.z);
 
-		mesh->render();
+	mesh->render();
 
 	glPopMatrix();
 
@@ -68,4 +68,17 @@ void EntityPlayer::update( double elapsed_time)
 		fire = false;
 	}
 	mesh->collision_model->setTransform(getGlobalMatrix().m);
+
+	if(has_particula)
+	{
+		Particula* p = EmisorParticulas::getInstance()->getParticula(particula);
+		if(p != NULL){
+			front = this->getGlobalMatrix().frontVector();
+			//std::cout<<this->name<<"  :: "<<this->getGlobalMatrix().frontVector().x<<"  :: "<<this->getGlobalMatrix().frontVector().y<<"  :: "<<this->getGlobalMatrix().frontVector().z << std::endl;
+			p->pos = this->centerEntity;
+			p->vel = this->front;
+		}
+		else has_particula = 0;
+	}
 }
+

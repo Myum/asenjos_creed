@@ -83,6 +83,9 @@
     <ClCompile Include="..\..\src\Billboard.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\EmisorParticulas.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\game.h" />
@@ -162,6 +165,9 @@
       <Filter>coldet</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\Billboard.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\EmisorParticulas.h">
       <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>

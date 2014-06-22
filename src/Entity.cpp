@@ -95,13 +95,19 @@ void Entity::killEntity(std::string name)
 		if((*it)->name == name)
 			break;
 	}
+	
+	std::cout<< (*it)->className << " borrado!!!!"<<std::endl;
+	delete (*it);
 	childEntities.erase(it);
-	mapEntities::iterator it2 = childNamedEntities.find( name );
+	//(*it)->deleteMe();
+	/*mapEntities::iterator it2 = childNamedEntities.find( name );
 	if( it2 != childNamedEntities.end() )
 	{
 		it2->second = NULL;
 		std::cout<< name << " borrado!!!!"<<std::endl;
 		std::cout<< childEntities.size() << " redimensionado"<<std::endl;
-	}
-
+	}*/
+	mapEntities::iterator it2 = childNamedEntities.find( name );
+		childNamedEntities.erase(it2);
 }
+

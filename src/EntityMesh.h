@@ -5,6 +5,7 @@
 #include "texture.h"
 #include "shader.h"
 #include "Camera.h"
+#include "EmisorParticulas.h"
 
 class EntityMesh : public Entity
 {
@@ -30,6 +31,11 @@ public:
 	//center
 	Vector3 centerEntity;
 	Vector3 position;
+	Vector3 front;
+
+	//particula asociada
+	int particula;
+	bool has_particula;
 
 	// when something collides with it
 	bool intercepted;
@@ -42,5 +48,7 @@ public:
 	bool meshCollision(EntityMesh* eM);
 	float distanceOfCollision(Vector3 ray_origin, Vector3 ray_direction);
 	bool boundingBoxCollision(EntityMesh* eM);
+
+
 };
 

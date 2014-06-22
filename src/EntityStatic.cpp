@@ -40,3 +40,4 @@ void EntityStatic::render()
 
 	glEnable( GL_DEPTH_TEST );
 }
+

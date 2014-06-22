@@ -12,7 +12,7 @@
 #include <sstream>
 #include "Bullet.h"
 #include "Billboard.h"
-
+#include "EmisorParticulas.h"
 
 //some globals
 //World will contain all Entities
@@ -30,8 +30,9 @@ EntityMesh* sky;
 EntityMesh* box=NULL;
 EntityMesh* isle=NULL;
 Billboard* cloud = NULL;
+EmisorParticulas* emisorParticulas;
 
-const int numEnemies = 100;
+const int numEnemies = 3;
 std::vector<EntityMesh*> died_planes;
 
 int x = 0, y = 0, z = 0;
@@ -50,6 +51,7 @@ Game::Game(SDL_Window* window)
 
 	//set reference to World
 	world = World::getInstance();
+	emisorParticulas = EmisorParticulas::getInstance();
 }
 
 //Here we have already GL working, so we can create meshes and textures
@@ -78,7 +80,7 @@ void Game::init(void)
 		textureManager->getTexture("assets/textures/cielo.tga"));
 	sky->name = "sky";
 	world->addEntityChildren( sky );
-	
+
 	isle = new EntityMesh(
 		meshManager->getMesh("assets/meshes/island.ASE"),
 		textureManager->getTexture("assets/textures/island_color_luz.tga")
@@ -86,9 +88,8 @@ void Game::init(void)
 	isle->name="isle0";
 	isle->model.setTranslation(isle->mesh->halfsize.x*2,-2000,0);
 	isle->fixedMesh = 1;
-	//isle->mesh->collision_model->setTransform(isle->getGlobalMatrix().m);
 	world->addEntityChildren(isle);
-	//((EntityMesh*)world->getChildren("isle"))->mesh->collision_model->setTransform(isle->getGlobalMatrix().m);
+	((EntityMesh*)world->getChildren("isle0"))->mesh->collision_model->setTransform(isle->getGlobalMatrix().m);
 
 
 	isle = new EntityMesh(
@@ -103,9 +104,9 @@ void Game::init(void)
 	((EntityMesh*)world->getChildren("isle"))->mesh->collision_model->setTransform(isle->getGlobalMatrix().m);
 
 	/*	isle = new EntityMesh(
-		meshManager->getMesh("assets/meshes/terrain.ASE"),
-		textureManager->getTexture("assets/textures/terrain.tga")
-		);
+	meshManager->getMesh("assets/meshes/terrain.ASE"),
+	textureManager->getTexture("assets/textures/terrain.tga")
+	);
 	isle->name="isle2";
 	isle->fixedMesh = 1;
 	isle->model.setTranslation(0,-2000,0);
@@ -116,14 +117,14 @@ void Game::init(void)
 
 	box = new EntityMesh (
 		meshManager->getMesh("assets/meshes/box.ASE"),
-		textureManager->getTexture("assets/textures/bomber_axis.tga")
+		textureManager->getTexture("assets/textures/smoke_alpha.tga")
 		);
 	box->name = "box";
 	box->model.setTranslation(500,0,300);
 	//box->fixedMesh = 1;
 	world->addEntityChildren( (EntityMesh*)box );
 
-		box = new EntityMesh (
+	box = new EntityMesh (
 		meshManager->getMesh("assets/meshes/box.ASE"),
 		textureManager->getTexture("assets/textures/bomber_axis.tga")
 		);
@@ -131,7 +132,7 @@ void Game::init(void)
 	box->model.setTranslation(10,25,2300);
 	world->addEntityChildren( (EntityMesh*)box );
 
-			box = new EntityMesh (
+	box = new EntityMesh (
 		meshManager->getMesh("assets/meshes/box.ASE"),
 		textureManager->getTexture("assets/textures/bomber_axis.tga")
 		);
@@ -139,13 +140,27 @@ void Game::init(void)
 	box->model.setTranslation(10,25,2600);
 	world->addEntityChildren( (EntityMesh*)box );
 
+	/*Particula* p = new Particula(Vector3(-50,-10,160),Vector3(0,1,1),10,90,0.5,textureManager->getTexture("assets/textures/smoke_alpha.tga"));
+	emisorParticulas->addParticula(p);
+	p = new Particula(Vector3(0,0,-300),Vector3(0,1,20),20,90,0.5,textureManager->getTexture("assets/textures/smoke_alpha.tga"));
+	emisorParticulas->addParticula(p);*/
+	//p = new Particula(Vector3(-10,10,360),Vector3(0,5,5),500.0,200,0.5,textureManager->getTexture("assets/textures/cielo.tga"));
+	//emisorParticulas->addParticula(p);
+
+
 	//create a plane mesh
 	plane = new EntityPlayer(
 		meshManager->getMesh("assets/meshes/bomber_axis.ASE"),
 		textureManager->getTexture("assets/textures/bomber_axis.tga")
 		);
 	plane->name = "plane";
+		/*Particula * p = new Particula(Vector3(),Vector3(),40,10,0.3,textureManager->getTexture("assets/textures/smoke_alpha.tga"));
+		emisorParticulas->addParticula(p);
+		plane->has_particula = 1;
+		plane->particula = p->id;*/
+
 	world->addEntityChildren( (EntityMesh*)plane );
+
 
 	//create a plane mesh
 	for(int i = 0; i <numEnemies; i++)
@@ -155,32 +170,39 @@ void Game::init(void)
 			textureManager->getTexture("assets/textures/spitfire_color_spec.tga")
 			);
 		enemies->low_mesh = meshManager->getMesh("assets/meshes/spitfire_low.ASE");
-		enemies->model.setTranslation(rand()%550, rand()%550, rand()%550);
+		enemies->model.setTranslation(rand()%150, rand()%150, rand()%250);
 
 		std::ostringstream ostr;
 		ostr << "plane" << i; 
 		enemies->name = ostr.str();
 		std::cout << enemies->name << std::endl;
+
+		Particula * p = new Particula(Vector3(),Vector3(),20,10,0.3,textureManager->getTexture("assets/textures/smoke_alpha.tga"));
+		emisorParticulas->addParticula(p);
+		enemies->has_particula = 1;
+		enemies->particula = p->id;
+
 		world->addEntityChildren( (EntityMesh*)enemies );
 	}
 	//died_planes.resize(numEnemies);
 
 
-		cloud = new Billboard(textureManager->getTexture("assets/textures/clouds.tga"));
-		//cloud->model.setTranslation(pos.x,pos.y,pos.z);
-		cloud->size = 200 + (( rand() % 10000) / 10000.0) * 50;
-		cloud->has_blend = true;
-			for(int i = 0; i<350; ++i)
-		{
-					Vector3 pos; 
+	cloud = new Billboard(textureManager->getTexture("assets/textures/clouds.tga"));
+	//cloud->model.setTranslation(pos.x,pos.y,pos.z);
+	cloud->size = 200 + (( rand() % 10000) / 10000.0) * 50;
+	cloud->has_blend = true;
+	for(int i = 0; i<0; ++i) 
+	{
+		Vector3 pos; 
 		pos.random(5000);
 		pos.y *= 0.1;
 		pos.y += 1000;
 		//cloud->points.push_back(pos);
+
 		cloud->points.push_back(new PointCloud(i,pos, ( (rand()%1000)/1000.0 )*500 ));
-		}
-		world->addEntityChildren(cloud);
-	
+	}
+	world->addEntityChildren(cloud);
+
 
 
 	world->init();
@@ -257,7 +279,7 @@ void Game::update(double seconds_elapsed)
 	if(joystick)
 	{
 		JoystickState state = getJoystickState( joystick );
-		
+
 		if(state.button[6] != NULL)
 			speed *= 50;
 
@@ -330,12 +352,12 @@ void Game::update(double seconds_elapsed)
 	{*/
 	camera->lookAt(plane->model * Vector3(0,4,-10), plane->model*Vector3(0, 0, 150),plane->model.frontVector());	
 	//}
-
+	//camera->lookAt(plane->model * Vector3(0,4,-50), plane->model*Vector3(0, 0, 150),plane->model.frontVector());	
 	sky = (EntityMesh*)world->getChildren( "sky" );
 	sky->model.setTranslation( camera->eye.x, camera->eye.y, camera->eye.z );
-	//camera->lookAt(camera->eye,entityPlane->model*Vector3(),Vector3(0,1,0));
+	//camera->lookAt(camera->eye,plane->model*Vector3(),Vector3(0,1,0));
 
-		if(keystate[SDL_SCANCODE_SPACE])
+	if(keystate[SDL_SCANCODE_SPACE])
 	{
 		std::cout << "bullet sent" << std::endl;
 		/*Vector3 start_pos = world->currentCamera->eye;
@@ -349,7 +371,7 @@ void Game::update(double seconds_elapsed)
 		plane->fire = true;
 	}
 
-			//update world
+	//update world
 	world->update( seconds_elapsed );
 
 	plane = (EntityPlayer*)world->getChildren( "plane" );

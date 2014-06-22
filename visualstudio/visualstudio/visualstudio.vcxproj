@@ -95,6 +95,7 @@
     <ClCompile Include="..\..\src\coldet\mytritri.cpp" />
     <ClCompile Include="..\..\src\coldet\sysdep.cpp" />
     <ClCompile Include="..\..\src\coldet\tritri.c" />
+    <ClCompile Include="..\..\src\EmisorParticulas.cpp" />
     <ClCompile Include="..\..\src\Entity.cpp" />
     <ClCompile Include="..\..\src\EntityMesh.cpp" />
     <ClCompile Include="..\..\src\EntityPlayer.cpp" />
@@ -123,6 +124,7 @@
     <ClInclude Include="..\..\src\coldet\math3d.h" />
     <ClInclude Include="..\..\src\coldet\mytritri.h" />
     <ClInclude Include="..\..\src\coldet\sysdep.h" />
+    <ClInclude Include="..\..\src\EmisorParticulas.h" />
     <ClInclude Include="..\..\src\Entity.h" />
     <ClInclude Include="..\..\src\EntityMesh.h" />
     <ClInclude Include="..\..\src\EntityPlayer.h" />

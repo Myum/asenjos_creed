@@ -23,13 +23,15 @@ void Bullet::update(double dt)
 	pos = pos + vel * dt;
 }
 void Bullet::render(){
+	glLineWidth(2.5);
 	glBegin(GL_LINES);
-		glColor4f(1,1,0,1);
+		glColor4f(1,1,0,0);
 		glVertex3f(pos.x, pos.y, pos.z);
 		Vector3 aux = vel;
 		Vector3 end = pos- aux.normalize()*15;
 		glVertex3f( end.x, end.y, end.z);
 	glEnd();
+	glLineWidth(1.f);
 	//glColor3f(1,1,1);
 }
 

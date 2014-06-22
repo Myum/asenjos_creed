@@ -30,5 +30,6 @@ public:
 	Vector3 right;
 	void render();
 	Texture* texture;
+
 };
 

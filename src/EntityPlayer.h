@@ -18,6 +18,10 @@ public:
 	void render();
 	bool fire;
 
+	void init();
+	void reinit();
+	float life;
 
+	Vector3 startPosition;
 
 };

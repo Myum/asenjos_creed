@@ -7,12 +7,14 @@
 #include "Bullet.h"
 #include "EmisorParticulas.h"
 #include <map>
+#include "AIController.h"
 
 class World: public Entity
 {
 private:
 	static World* instance;
 	
+	std::vector<AIController*> IA;
 	World();
 
 public:
@@ -32,5 +34,9 @@ public:
 	void render();
 	void update( double elapsed_time );
 
+	void addIA(Entity* toControll);
+	void killEntity(std::string name);
 
+
+	Entity* player;
 };

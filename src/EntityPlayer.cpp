@@ -24,6 +24,27 @@ EntityPlayer::~EntityPlayer()
 {
 }
 
+void EntityPlayer::init()
+{
+	fire = false;
+	life = 10000;
+	//startPostition = Vector3(this->model.m[12],this->model.m[12],this->model.m[12]
+	startPosition = this->centerEntity;
+}
+void EntityPlayer::reinit()
+{
+	/*std::cout<<"startPosition "<<startPosition.x<<" : "<<startPosition.y<<" : "<<startPosition.z<<"  "<<std::endl;
+	std::cout<<"this->centerEntity "<<this->centerEntity.x<<" : "<<this->centerEntity.y<<" : "<<this->centerEntity.z<<""<<std::endl;*/
+
+	fire = false;
+	life = 10000;
+	this->model.setTranslation(startPosition.x,startPosition.y,startPosition.z);
+	intercepted = false;
+	/*std::cout<<"final "<<restartPostition.x<<" : "<<restartPostition.y<<" : "<<restartPostition.z<<"  "<<std::endl;
+	std::cout<<"model "<<(this->model.m)[12]<<" : "<<(this->model.m)[13]<<" : "<<(this->model.m)[14]<<"  "<<std::endl;*/
+}
+
+
 void EntityPlayer::render()
 {
 	glDisable( GL_CULL_FACE );
@@ -32,7 +53,12 @@ void EntityPlayer::render()
 	model.set();
 
 	this->texture->bind();
-	glColor3f(color.x, color.y, color.z);
+		if(intercepted)
+	{
+		glColor3f(1,0,0);
+		//intercepted = false;
+	}
+	else glColor3f(color.x, color.y, color.z);
 
 	mesh->render();
 
@@ -43,8 +69,11 @@ void EntityPlayer::render()
 
 void EntityPlayer::update( double elapsed_time)
 {
-	//std::cout << "entityplayer: "<<std::endl;
 
+	if(intercepted)
+	{
+		this->reinit();	
+	}
 	for(vecEntities::iterator it = childEntities.begin() ; it != childEntities.end(); ++it)
 	{
 		(*it)->update( elapsed_time );
@@ -80,5 +109,6 @@ void EntityPlayer::update( double elapsed_time)
 		}
 		else has_particula = 0;
 	}
+
 }
 

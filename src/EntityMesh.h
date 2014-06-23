@@ -40,6 +40,8 @@ public:
 	// when something collides with it
 	bool intercepted;
 
+
+
 	//to diferenciate the terrain coz the sphere collision is too big
 	int fixedMesh;
 

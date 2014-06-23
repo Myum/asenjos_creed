@@ -11,6 +11,14 @@ World::World():Entity()
 	parent = NULL;
 }
 
+void World::addIA(Entity* toControll)
+{
+	AIController* ia = new AIController();
+	ia->controlled = toControll;
+
+	IA.push_back(ia);
+}
+
 void World::render()
 {
 	glPushMatrix();
@@ -57,13 +65,21 @@ void World::render()
 
 	//glEnable( GL_CULL_FACE );
 	BulletManager::getInstance()->render();
-	EmisorParticulas::getInstance()->render();
+	//EmisorParticulas::getInstance()->render();
 
 	glPopMatrix();
 }
 
 void World::update( double elapsed_time )
 {
+		for(size_t i = 0; i < IA.size(); ++i)
+	{
+		Vector3 posPlayer = Vector3(player->model.m[12], player->model.m[13], player->model.m[14]);
+		IA[i]->targetPos = posPlayer;
+		IA[i]->update(elapsed_time);
+	}
+
+
 	for(vecEntities::iterator it = childEntities.begin() ; it != childEntities.end(); ++it)
 	{
 		(*it)->update( elapsed_time );
@@ -113,3 +129,36 @@ void World::update( double elapsed_time )
 	EmisorParticulas::getInstance()->update(elapsed_time);
 }
 
+
+
+void World::killEntity(std::string name)
+{
+	vecEntities::iterator it = childEntities.begin();
+	for(it; it!=childEntities.end();++it)
+	{
+		if((*it)->name == name)
+			break;
+	}
+	
+	std::cout<< (*it)->className << " borrado!!!!"<<std::endl;
+
+	bool has_ia = false;
+	std::vector<AIController*>::iterator itIA = IA.begin();
+	for(itIA; itIA!=IA.end();++itIA)
+	{
+		if( (*itIA)->controlled->name == name )
+		{
+			(*itIA)->controlled = NULL;
+			has_ia = true;
+			break;
+		}
+	}
+	if(has_ia)
+		IA.erase(itIA);
+
+	delete (*it);
+	childEntities.erase(it);
+
+	mapEntities::iterator it2 = childNamedEntities.find( name );
+		childNamedEntities.erase(it2);
+}

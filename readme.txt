@@ -5,3 +5,5 @@ v.09
 ->es checkeja contra bounding box el terreny
 v.10
 ->particules
+v.11
+->IA + classe Spitfire

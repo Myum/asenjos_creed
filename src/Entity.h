@@ -28,7 +28,7 @@ public:
 	vecEntities childEntities;
 	mapEntities childNamedEntities;
 	
-	void killEntity(std::string name);
+	//void killEntity(std::string name);
 
 	//graphic flags
 	bool has_alpha;

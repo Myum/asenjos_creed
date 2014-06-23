@@ -86,6 +86,12 @@
     <ClCompile Include="..\..\src\EmisorParticulas.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\AIController.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Spitfire.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\game.h" />
@@ -168,6 +174,12 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\EmisorParticulas.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\AIController.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Spitfire.h">
       <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>

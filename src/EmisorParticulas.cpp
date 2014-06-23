@@ -20,7 +20,7 @@ void Particula::addParticulaChildren(Particula* p)
 
 EmisorParticulas::EmisorParticulas()
 {
-	numParticulasPorFuente = 30;
+	numParticulasPorFuente = 100;
 }
 
 
@@ -38,7 +38,7 @@ bool EmisorParticulas::addParticula(Particula* p)
 		p->parent = NULL;
 		for(int i = 0; i < numParticulasPorFuente; ++i)
 		{
-			Particula * child = new Particula(p->pos, p->vel,( (p->TTL) /100000) / (1 + rand()%100),20,p->alpha, p->texture);
+			Particula * child = new Particula(p->pos, p->vel,( (p)->TTL)  / (1 + rand()%10)/*( p->TTL*2) / (1 + rand()%100)*/,p->size,p->alpha, p->texture);
 			/*child->vel.x = child->vel.x * (rand()%155);
 			child->vel.y = child->vel.y * (rand()%150);
 			child->vel.z = child->vel.z * (rand()%150);*/
@@ -54,7 +54,7 @@ bool EmisorParticulas::addParticula(Particula* p)
 		p->parent = NULL;
 		for(int i = 0; i < numParticulasPorFuente; ++i)
 		{
-			Particula * child = new Particula(p->pos, p->vel,( (p->TTL) /100000) / (1 + rand()%100),20,p->alpha, p->texture);
+			Particula * child = new Particula(p->pos, p->vel,( (p)->TTL)  / (1 + rand()%10)/*( p->TTL )  / (1 + rand()%100)*/,p->size,p->alpha, p->texture);
 			/*child->vel.x = child->vel.x * (rand()%55);
 			child->vel.y = child->vel.y * (rand()%50);
 			child->vel.z = child->vel.z * (rand()%50);*/
@@ -129,7 +129,7 @@ void EmisorParticulas::update(double dt)
 
 					float size,alpha,ttl;
 					size =  (*itSurtidor)->size;
-					(*itSurtidor)->size = size + (1.5 * dt);
+					(*itSurtidor)->size = size + (5.5 * dt);
 					/*alpha = (*itSurtidor)->alpha;
 					(*itSurtidor)->alpha = alpha - (0.01 * dt) ;*/
 					ttl = (*itSurtidor)->TTL;
@@ -141,12 +141,12 @@ void EmisorParticulas::update(double dt)
 					(*itSurtidor)->size = (*itSurtidor)->parent->size;
 					//(*itSurtidor)->alpha = (*itSurtidor)->parent->alpha;
 					(*itSurtidor)->vel = (*itSurtidor)->parent->vel * -1000;
+					//std::cout<<"!!"<<(*itSurtidor)->vel.y<<std::endl;
+					(*itSurtidor)->vel.x = (*itSurtidor)->vel.x * (8 + rand()%11);
+					(*itSurtidor)->vel.y = (*itSurtidor)->vel.y * (8 + rand()%11);
+					(*itSurtidor)->vel.z = (*itSurtidor)->vel.z * (8 + rand()%11);
 
-					(*itSurtidor)->vel.x = (*itSurtidor)->vel.x * (1 + rand()%5);
-					(*itSurtidor)->vel.y = (*itSurtidor)->vel.y * (1 + rand()%5);
-					(*itSurtidor)->vel.z = (*itSurtidor)->vel.z * (1 + rand()%5);
-
-					(*itSurtidor)->TTL = 2 + rand()%5;/*(rand()%(((*itSurtidor)->parent->fixedTTL)/10));*/
+					(*itSurtidor)->TTL =( (*itSurtidor)->fixedTTL)  / (1 + rand()%10); /*2 + rand()%5;*///(rand()%(((*itSurtidor)->parent->fixedTTL)/10));
 				}
 			}
 		}
@@ -172,7 +172,7 @@ void EmisorParticulas::update(double dt)
 				else
 				{
 					if((*itSurtidor)->size > 0.5){
-					(*itSurtidor)->size = (*itSurtidor)->size - 0.5;
+					(*itSurtidor)->size = (*itSurtidor)->size - 0.9;
 					}
 					++particulasDead;
 

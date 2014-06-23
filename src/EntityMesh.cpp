@@ -5,6 +5,7 @@ EntityMesh::EntityMesh():Entity()
 	this->className = "EntityMesh";
 	this->fixedMesh = 0;
 	this->has_particula = 0;
+	this->intercepted = 0;
 }
 
 EntityMesh::EntityMesh( Mesh* mesh ):Entity()
@@ -15,6 +16,7 @@ EntityMesh::EntityMesh( Mesh* mesh ):Entity()
 	this->centerEntity = mesh->center;
 	this->fixedMesh = 0;
 	this->has_particula = 0;
+	this->intercepted = 0;
 }
 
 EntityMesh::EntityMesh( Mesh* mesh, Texture* texture ):Entity()
@@ -26,6 +28,7 @@ EntityMesh::EntityMesh( Mesh* mesh, Texture* texture ):Entity()
 	this->centerEntity = mesh->center;
 	this->fixedMesh = 0;
 	this->has_particula = 0;
+	this->intercepted = 0;
 }
 
 EntityMesh::EntityMesh( Mesh* mesh, Texture* texture, Vector3 color ):Entity()
@@ -37,6 +40,7 @@ EntityMesh::EntityMesh( Mesh* mesh, Texture* texture, Vector3 color ):Entity()
 	this->centerEntity = mesh->center;
 	this->fixedMesh = 0;
 	this->has_particula = 0;
+	this->intercepted = 0;
 }
 
 EntityMesh::~EntityMesh()
@@ -48,8 +52,10 @@ EntityMesh::~EntityMesh()
 
 
 
+
 void EntityMesh::update( double elapsed_time )
 {
+
 	for(vecEntities::iterator it = childEntities.begin() ; it != childEntities.end(); ++it)
 	{
 		(*it)->update( elapsed_time );
@@ -86,8 +92,8 @@ void EntityMesh::render()
 	{
 		glColor3f(1,0,0);
 		intercepted = false;
-		//std::cou
 	}
+
 	mesh->render();
 	this->texture->unbind();
 

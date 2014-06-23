@@ -20,12 +20,12 @@ void Mesh::clear()
 void Mesh::render()
 {
 	assert(vertices.size() && "No vertices in this mesh");
-	glBegin(GL_LINES);
+	/*glBegin(GL_LINES);
 		//glColor4f(1,1,0,1);
 		glVertex3f(centerBB.x, centerBB.y, centerBB.z);
 		//std::cout<<halfsize.x<<std::endl;
 		glVertex3f( halfsize.x, halfsize.y, halfsize.z);
-	glEnd();
+	glEnd();*/
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, &vertices[0] );

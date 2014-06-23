@@ -86,10 +86,10 @@ float Entity::distanceToCamera(Vector3 eye)
 	v.z = (this->getGlobalMatrix().m)[14];
 	return  eye.distance( v );
 }
-
+/*
 void Entity::killEntity(std::string name)
 {
-	vecEntities::iterator it = childEntities.begin();
+	/*vecEntities::iterator it = childEntities.begin();
 	for(it; it!=childEntities.end();++it)
 	{
 		if((*it)->name == name)
@@ -106,8 +106,9 @@ void Entity::killEntity(std::string name)
 		it2->second = NULL;
 		std::cout<< name << " borrado!!!!"<<std::endl;
 		std::cout<< childEntities.size() << " redimensionado"<<std::endl;
-	}*/
+	}*//*
 	mapEntities::iterator it2 = childNamedEntities.find( name );
-		childNamedEntities.erase(it2);
-}
+		childNamedEntities.erase(it2);*/
+/*
+}*/
 
